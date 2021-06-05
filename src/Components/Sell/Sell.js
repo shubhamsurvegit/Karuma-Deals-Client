@@ -23,7 +23,6 @@ const Sell = () => {
         fileReader.onload = function(fileLoadedEvent) {
           const srcData = fileLoadedEvent.target.result;
           formData.images[e.target.id]=srcData // og code
-        // formData.images.push=srcData
           setFormData({...formData})
         }
         fileReader.readAsDataURL(file);

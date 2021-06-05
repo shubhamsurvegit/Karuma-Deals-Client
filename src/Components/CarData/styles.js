@@ -20,5 +20,11 @@ export default makeStyles(()=>({
         right:'0',
         bottom:'0',
         backgroundColor:'rgba(0,0,0,0.7)',
+    },
+    corousel:{
+        width:'70%',
+        height:'70%',
+        backgroundPosition:'center',
+        margin:'10px auto '
     }
 }))
