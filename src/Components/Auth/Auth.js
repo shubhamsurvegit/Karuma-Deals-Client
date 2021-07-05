@@ -3,8 +3,8 @@ import {Container,Grid,Paper,Typography,TextField, Button} from '@material-ui/co
 import useStyles from './style'
 import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import GoogleLogin from 'react-google-login'
-import {login,register,login_with_google} from '../../actions/action'
+
+import {login,register} from '../../actions/action'
 const Auth = () => {
     const history=useHistory();
     const dispatch=useDispatch();
@@ -12,7 +12,7 @@ const Auth = () => {
     const [errcheck,setErrcheck]=useState(false);
     const [isSignUp,setIsSignUp]=useState(false);
     const [formData,setFormData]=useState({
-        name:'',email:'',password:'',confirmPassword:''
+        name:'',phone:'',password:'',confirmPassword:''
     })
 
     const handleChange=(e)=>{
@@ -22,7 +22,7 @@ const Auth = () => {
     const handleSubmit=(e)=>{   
         e.preventDefault();
         if(isSignUp){
-            if(!formData.name || !formData.email || !formData.password || !formData.confirmPassword){
+            if(!formData.name || !formData.phone || !formData.password || !formData.confirmPassword){
                 setErrcheck(true)
             }
             else if(formData.password!==formData.confirmPassword){
@@ -33,7 +33,7 @@ const Auth = () => {
             }
         }
         else{
-            if( !formData.email || !formData.password){
+            if( !formData.phone || !formData.password){
                 setErrcheck(true)
             }
             else{
@@ -42,20 +42,7 @@ const Auth = () => {
         }
     }
 
-    const googleSuccess=async (res)=>{
-        const token=res.tokenId;
-        const userData={
-            name:res.profileObj.name,
-            email:res.profileObj.email,
-            password:res.profileObj.email,
-            token:token
-        }
-        dispatch(login_with_google(userData,history))
-    }
-
-    const googleFailure=()=>{
-        console.log("FAILED")
-    }
+    
 
     return (
         <Container component="main" maxWidth="xs">
@@ -68,7 +55,7 @@ const Auth = () => {
                         <TextField onChange={handleChange} size="small" name="name" placeholder="Enter Name" type="text" variant="outlined"></TextField>
                         </Grid>}
                         <Grid item>
-                            <TextField onChange={handleChange} size="small" name="email" placeholder="Enter Email" type="email" variant="outlined"></TextField>
+                            <TextField onChange={handleChange} size="small" name="phone" placeholder="Enter Your Mobile Number" type="number" variant="outlined"></TextField>
                         </Grid>
                         <Grid item>
                             <TextField onChange={handleChange} size="small" name="password" placeholder="Enter Password" type="password" variant="outlined"></TextField>
@@ -81,15 +68,6 @@ const Auth = () => {
                             <Grid item >
                                 <Button onClick={handleSubmit} variant="contained" color="primary">{isSignUp?'Sign Up':'Sign In'}</Button>
                             </Grid>
-                            {!isSignUp && <Grid item>
-                                <GoogleLogin
-                                    clientId="171435688530-2nemu2q9o4o3mkak72e65787huumt7rr.apps.googleusercontent.com"
-                                    buttonText="Login with Google"
-                                    onSuccess={googleSuccess}
-                                    onFailure={googleFailure}
-                                    cookiePolicy={'single_host_origin'}
-                                />
-                            </Grid>}
                         </Grid>
                 </form>
                 <Button onClick={()=>setIsSignUp(!isSignUp)} className={classes.submit} size="small">

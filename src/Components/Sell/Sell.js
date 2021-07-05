@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Form1 from './Forms/Form1'
 import Form2 from './Forms/Form2'
 import {listcar} from '../../actions/action'
@@ -15,7 +15,12 @@ const Sell = () => {
             image1:'',image2:'',image3:'',image4:'',image5:''},contact:''
     });
 
-   
+    useEffect(()=>{
+        const user=JSON.parse(localStorage.getItem('profile'))?.result.name
+        if(typeof user==='undefined'){
+            console.log('KINDLY LOGIN')
+        }
+    })
 
     const encode=(e)=>{
         const file=e.target.files[0];
@@ -42,7 +47,6 @@ const Sell = () => {
     }
 
     const submit=()=>{
-        console.log(formData)
         dispatch(listcar(formData,history))
     }
 

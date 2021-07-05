@@ -3,9 +3,12 @@ import {Grid,Paper,Button,TextField,Card} from '@material-ui/core'
 import InsertPhotoSharpIcon from '@material-ui/icons/InsertPhotoSharp';
 
 const Form2 = ({formData,step,back,submit,handleChange,encode}) => {
+
     const paper={padding:'10px',height:450,width:260,margin:'20px auto'}
+    const user=JSON.parse(localStorage.getItem('profile'))?.result
     const {image1,image2,image3,image4,image5}=formData.images
     const [popup,setPopup]=useState('');
+    
     return (
         <Paper style={paper}>
             <div>
@@ -61,8 +64,8 @@ const Form2 = ({formData,step,back,submit,handleChange,encode}) => {
 
             <form>
                 <TextField onChange={handleChange} margin="normal" name="selling_price" placeholder="Selling Price"></TextField>
-                <TextField margin="normal" label="Name" variant="outlined" defaultValue="Shubham"></TextField>
-                <TextField onChange={handleChange} name="contact" margin="normal" label="Contact" variant="outlined"></TextField>
+                <TextField margin="normal" label="Name" variant="outlined" defaultValue={user.name}></TextField>
+                <TextField onChange={handleChange} defaultValue={user.phone} name="contact" margin="normal" label="Contact" variant="outlined"></TextField>
                 {step>0 && <Button onClick={back} variant="contained" color="secondary">Back</Button>}
                 <Button onClick={submit} variant="contained" color="primary">Sell Car</Button>
             </form>
