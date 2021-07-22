@@ -27,7 +27,7 @@ const Navbar = ({logo}) => {
     return (
         <div className={classes.nav}>
                 <div className={classes.logo}>
-                <img className={classes.logoimage} alt="logo" src={logo}></img>
+                    <img className={classes.logoimage} alt="logo" src={logo}></img>
                 </div>
                 
                 <div className="menuicon" onClick={()=>setIcon(!icon)}>
@@ -54,7 +54,7 @@ const Navbar = ({logo}) => {
                             <Avatar onClick={()=>setDropdown(!dropdown)}>{user.charAt(0)}</Avatar>
                             <Paper onClick={()=>setDropdown(!dropdown)} className={dropdown?classes.down:classes.notdown}>
                                 <p className={classes.drops}>Signed in as <b>{user}</b></p>
-                                <p className={classes.drops}><Link style={{color:'black',textDecoration:'none'}} to="/deals">My Deals</Link></p>
+                                <p className={classes.drops}><Link style={{color:'black',textDecoration:'none'}} to="/mydeals">My Deals</Link></p>
                                 <Button onClick={logout}  variant="contained" size="small" color="secondary">Logout</Button> 
                             </Paper>
                         </div>

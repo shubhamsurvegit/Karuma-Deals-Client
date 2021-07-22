@@ -8,6 +8,7 @@ export default makeStyles((theme)=>({
         display:'flex',
         alignItems:'center',
         fontsize:'1.2rem',
+        zIndex:'1000',
         [theme.breakpoints.down(780)]: {
             position:'relative',
         }
@@ -62,7 +63,6 @@ export default makeStyles((theme)=>({
         }
     },
     logo:{
-        backgroundColor:'red',
         position:'absolute',
         width:'40px',
         height:'40px',
@@ -112,7 +112,8 @@ export default makeStyles((theme)=>({
         transform:'translate(-50%,-50%)',
         [theme.breakpoints.down(780)]: {
             left:'380px',
-        }
+        },
+        zIndex:'1'
     },
     down:{
         position:'fixed',
@@ -120,7 +121,7 @@ export default makeStyles((theme)=>({
         right:'0',
         width:'170px',
         height:'120px',
-        padding:'10px'
+        padding:'10px',
     },
     notdown:{
         display:'none'

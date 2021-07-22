@@ -6,11 +6,12 @@ export const login=(userData,history)=>
     async (dispatch)=>{
         console.log(userData)
         axios.post(`${url}/login`,userData)
-        .then(({data})=>{
+        .then(({data},res)=>{
             dispatch({type:'AUTH',data})
             history.push('/')
         })
         .catch((err)=>{
+            
             console.log(err)
         })
     }
@@ -55,7 +56,6 @@ const addtoken=()=>{
 
 export const listcar=(cardata,history)=>
     async(dispatch) =>{
-        console.log(cardata)
         const head=addtoken();
         axios.post(`${url}/sell`,cardata,head)
         .then(({data})=>{
@@ -70,6 +70,36 @@ export const getcars=()=>
         axios.get(`${url}/getcars`)
         .then(({data})=>{
             dispatch({type:'FETCH_ALL',payload:data})
+        })
+        .catch((err)=>console.log(err))
+    }
+
+export const mydeals=()=>
+    async (dispatch)=>{
+        const head=addtoken();
+        axios.get(`${url}/mydeals`,head)
+        .then(({data})=>{
+            dispatch({type:'FETCH_DEALS',payload:data})
+        })
+        .catch((err)=>console.log(err))
+    }    
+
+export const soldcar=(id)=>
+    async (dispatch)=>{
+        const head=addtoken();
+        axios.post(`${url}/soldcar`,{id:id},head)
+        .then(({data})=>{
+            dispatch({type:'SOLDCAR',payload:data})
+        })
+        .catch((err)=>console.log(err))
+    }
+
+export const removedeal=(id)=>
+    async (dispatch)=>{
+        const head=addtoken();
+        axios.post(`${url}/removedeal`,{id:id},head)
+        .then(({data})=>{
+            dispatch({type:'REMOVE_DEAL',payload:data})
         })
         .catch((err)=>console.log(err))
     }

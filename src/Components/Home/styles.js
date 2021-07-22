@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import bgimage from '../../bgimage.webp'
+
 export default makeStyles((theme)=>({    
     container:{
         width:'100%',
@@ -8,7 +9,8 @@ export default makeStyles((theme)=>({
         backgroundColor:'black',
         [theme.breakpoints.down(780)]: {
             height:'380vh'
-        }
+        },
+        zIndex:'-1'
     },
     showcase:{
         width:'100%',
@@ -17,6 +19,7 @@ export default makeStyles((theme)=>({
         background:`url(${bgimage}) no-repeat center bottom `,
         backgroundSize:'cover',
         opacity:'0.7',
+        zIndex:'-1',
         
     },
     text:{

@@ -25,9 +25,6 @@ const CarData = ({showDetails,seller,msg}) => {
                     </div>
                 </div>
                 {msg===seller.car_for_sale._id && <Typography variant="h5" component="h6">Message has been set to the seller via sms</Typography>}
-                <p>{seller.name}</p>
-                <p>{seller.car_for_sale.contact}</p>
-                <p>{seller.car_for_sale.model}</p>
                 <Button size="small" className={classes.close} onClick={showDetails}><CloseIcon/></Button>
             </div>
         </div>

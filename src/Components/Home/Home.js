@@ -23,15 +23,15 @@ const Home = ({bgimage}) => {
 
           <div className={classes.tabs}>
               <Paper className={classes.tab}>
-                <img className={classes.tabimg} alt="image" src={tab1}></img>
+                <img className={classes.tabimg} alt="tab1 " src={tab1}></img>
                 <p>Get Best deals for buying cars at affordable price and at par quality</p>
               </Paper>
               <Paper className={classes.tab}>
-                <img className={classes.tabimg} alt="image" src={tab2}></img>
+                <img className={classes.tabimg} alt="tab2" src={tab2}></img>
                 <p>Predict price of the car you want to sell using advance machine learning</p>
               </Paper>
               <Paper className={classes.tab}>
-                <img className={classes.tabimg} alt="image" src={tab3}></img>
+                <img className={classes.tabimg} alt="tab3" src={tab3}></img>
                 <p>List your car to sell here and get select the best deals</p>
               </Paper>
           </div>

@@ -1,4 +1,5 @@
 import { Container,Button, TextField, Box,Paper,Checkbox } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import React,{useEffect,useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {getcars} from '../../actions/action'
@@ -6,6 +7,7 @@ import Cars from '../Cars/Cars';
 import useStyle from './style'
 import {useSelector} from 'react-redux'
 import Brands from './Brands';
+
 const Buy = () => {
     const classes=useStyle();
     const dispatch=useDispatch();
@@ -14,6 +16,7 @@ const Buy = () => {
     const [filterdata,setFilterdata]=useState({location:'',Sprice:'',Eprice:'',brand:[]})
     const sellers_data=useSelector((state)=>state.sell.cars)
     const [sellers,setSellers]=useState([]);
+    const [errcheck,setErrcheck]=useState('');
 
     useEffect(()=>{
         console.log(filterdata)
@@ -94,45 +97,47 @@ const Buy = () => {
     }
     
     const handlePopupSubmit=(e)=>{
-        // const filtersellers=sellers_data.map((seller)=>{
-        //     const yes=seller.cars_for_sale.filter((car)=>{
-        //         return car.selling_price!=null && car.city===filterdata.location && filterdata.Sprice<=car.selling_price && car.selling_price<=filterdata.Eprice
-        //     })
-        //     return {...seller,cars_for_sale:yes}
-        // })
-        setPopup(false)
+        if(filterdata.location===''){
+            setErrcheck('Kindly enter desired location')
+            setTimeout(()=>{
+                setErrcheck('')
+            },3000)
+        }
+        else{
+            setPopup(false)
+        }
     }
 
     return (
         <Container>
-            <Box display="flex" flexDirection="row" p={1} m={1} spacing={10}>
-                <Box item paddingRight={15}>
-                    <p>Filters</p>
-                    <Button onClick={()=>setFilterdata({location:'',Sprice:0,Eprice:Number.MAX_VALUE,brand:''})}>Clear all filters</Button>
-                    <Box>
-                        <p>Search By location</p>
+            <Box  display="flex" flexDirection="row" p={1} m={1} spacing={10}>
+                <Box item paddingRight={1}>
+                    <Button color="primary" onClick={()=>setFilterdata({location:'',Sprice:0,Eprice:Number.MAX_VALUE,brand:''})}>Clear all filters</Button>
+                    <Box >
+                        <p style={{color:'blue'}}>Search By location</p>
                         <Button variant="contained" color="primary" onClick={()=>setPopup(true)}>{filterdata?.location?filterdata.location.toString():'Search'}</Button>
                     </Box>
+                    <hr></hr>
                     <Box display="flex" flexDirection="column">
-                        <p>Search By Prices</p>
-                        <Box item display="flex" flexDirection="row">
+                        <p style={{color:'blue'}}>Search By Prices</p>
+                        <Box item display="flex" flexDirection="row" >
                             <Checkbox onChange={handleChange} name="c1"></Checkbox>
-                            <label htmlFor="c1">0-2 lakh</label>
+                            <label className={classes.locationdiv} htmlFor="c1">0-2 lakh</label>
                         </Box>
                         <Box item display="flex" flexDirection="row">
                             <Checkbox onChange={handleChange} name="c2"></Checkbox>
-                            <label htmlFor="c2">2-5 lakh</label>
+                            <label className={classes.locationdiv} htmlFor="c2">2-5 lakh</label>
                         </Box>
                         <Box item display="flex" flexDirection="row">
                             <Checkbox onChange={handleChange} name="c3"></Checkbox>
-                            <label htmlFor="c3">5-10 lakh</label>
+                            <label className={classes.locationdiv} htmlFor="c3">5-10 lakh</label>
                         </Box>
                         <Box item display="flex" flexDirection="row">
                             <Checkbox onChange={handleChange} name="c4"></Checkbox>
-                            <label htmlFor="c4">10+ lakh</label>
+                            <label className={classes.locationdiv} htmlFor="c4">10+ lakh</label>
                         </Box> 
                     </Box>
-                  
+                    <hr></hr>
                     <Box>
                         <Brands filterdata={filterdata} setFilterdata={setFilterdata}/>
                     </Box>
@@ -140,8 +145,10 @@ const Buy = () => {
                     {popup && 
                     <Paper className={classes.bgview}>
                         <div className={classes.popup}>
-                            <TextField placeholder="enter city" type="text" name="location" onChange={handleChange}></TextField>
-                            <Button onClick={handlePopupSubmit}>Search</Button>
+                            <p style={{color:'blue'}}>Search Cars By Location</p>
+                            {errcheck && <Alert severity="error">{errcheck}</Alert>}
+                            <TextField className={classes.tf} size="sm" placeholder="enter city" type="text" name="location" onChange={handleChange}></TextField>
+                            <Button className={classes.btn} size="lg" color="primary" variant="contained" onClick={handlePopupSubmit}>Search</Button>
                         </div>
                     </Paper>
                     }
@@ -155,3 +162,4 @@ const Buy = () => {
 }
 
 export default Buy  
+

@@ -3,13 +3,14 @@ import {Container,Grid,Paper,Typography,TextField, Button} from '@material-ui/co
 import useStyles from './style'
 import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
+import Alert from '@material-ui/lab/Alert';
 
 import {login,register} from '../../actions/action'
 const Auth = () => {
     const history=useHistory();
     const dispatch=useDispatch();
     const classes=useStyles();
-    const [errcheck,setErrcheck]=useState(false);
+    const [errcheck,setErrcheck]=useState('');
     const [isSignUp,setIsSignUp]=useState(false);
     const [formData,setFormData]=useState({
         name:'',phone:'',password:'',confirmPassword:''
@@ -19,14 +20,19 @@ const Auth = () => {
         setFormData({...formData,[e.target.name]:e.target.value})
     }
 
+    const handleClick=((e)=>{
+        setIsSignUp(!isSignUp);
+        setErrcheck(false)
+    })
+
     const handleSubmit=(e)=>{   
         e.preventDefault();
         if(isSignUp){
             if(!formData.name || !formData.phone || !formData.password || !formData.confirmPassword){
-                setErrcheck(true)
+                setErrcheck("Kindly fill in all fields.")
             }
             else if(formData.password!==formData.confirmPassword){
-                setErrcheck(true)
+                setErrcheck('Password do not match.')
             }
             else{
                 dispatch(register(formData,history))
@@ -34,21 +40,26 @@ const Auth = () => {
         }
         else{
             if( !formData.phone || !formData.password){
-                setErrcheck(true)
+                setErrcheck("Kindly fill in all fields.")
+
             }
             else{
                 dispatch(login(formData,history))
             }
         }
+        setTimeout(()=>{
+            setErrcheck('')
+        },3000)
     }
 
     
 
     return (
-        <Container component="main" maxWidth="xs">
+        <div className={classes.container}>
+        <Container  component="main" maxWidth="xs">
             <Paper className={classes.paper}>
                 <Typography variant="h5" className={classes.para}>{isSignUp?'Register':'Login'}</Typography> 
-                {errcheck && <Typography variant="h5" className={classes.para}>achesse Sab bhar be</Typography> } 
+                {errcheck && <Alert severity="error">{errcheck}</Alert>}
                 <form className={classes.form}>
                     <Grid container space={3} spacing={2} justify='flex-start'>
                         {isSignUp && <Grid item>
@@ -70,10 +81,11 @@ const Auth = () => {
                             </Grid>
                         </Grid>
                 </form>
-                <Button onClick={()=>setIsSignUp(!isSignUp)} className={classes.submit} size="small">
+                <Button onClick={handleClick} className={classes.submit} size="small">
                     {isSignUp? 'Already have a account?':'Dont have a account?'}</Button>
             </Paper>
         </Container>
+        </div>
     )
 }
 

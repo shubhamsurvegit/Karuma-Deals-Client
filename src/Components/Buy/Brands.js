@@ -11,6 +11,7 @@ const Brands = ({filterdata,setFilterdata}) => {
             if(brand.toLowerCase().includes(input.toLowerCase())){
                 return brand;
             }
+            // return null
         })
         setbrands(filterbrands)
     },[input])
@@ -28,7 +29,7 @@ const Brands = ({filterdata,setFilterdata}) => {
     
     return (
         <div >
-            <p>Search By Brand</p>
+            <p style={{color:'blue'}}>Search By Brand</p>
             <TextField onChange={(e)=>setInput(e.target.value)} size="small" variant="filled" placeholder="Type here" name="brands"></TextField>
             <div style={{width: '160px',height: '310px',overflow:'scroll'}}>
                 {brands.map((brand,index)=>(

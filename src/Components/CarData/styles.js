@@ -9,8 +9,9 @@ export default makeStyles(()=>({
         top:'50%',
         left:'50%',
         transform:'translate(-50%,-50%)',
-        width:'65%',
-        height:'85%'
+        width:'55%',
+        height:'75%',
+        borderRadius:'10px',
     },
     view:{
         position:'fixed',
@@ -26,7 +27,7 @@ export default makeStyles(()=>({
         backgroundRepeat:'no-repeat',
         backgroundSize:'cover',
         backgroundPosition:'center',
-        margin:'10px auto',
+        margin:'40px auto',
         backgroundColor:'blue'
     },
     left:{

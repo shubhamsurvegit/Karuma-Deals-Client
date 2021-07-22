@@ -6,6 +6,8 @@ import Auth from './Components/Auth/Auth'
 import Buy from './Components/Buy/Buy'
 import logo from './logo1.jpg'
 import bgimage from './bgimage.webp'
+import Predict from './Components/Predict/Predict'
+import MyDeals from './Components/Mydeals/Mydeals'
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +17,8 @@ function App() {
         <Route path="/auth"><Auth/></Route>
         <Route path="/sell"><Sell/></Route>
         <Route path="/buy"><Buy/></Route>
+        <Route path="/pricing"><Predict/></Route>
+        <Route path="/mydeals"><MyDeals/></Route>
       </Switch>
     </BrowserRouter>
   );
