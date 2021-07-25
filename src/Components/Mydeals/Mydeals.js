@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import { Grid,Container, Paper, Button } from '@material-ui/core';
+import { Grid,Container,Button } from '@material-ui/core';
 import useStyles from './styles'
 import {useDispatch,useSelector} from 'react-redux'
 import { mydeals, soldcar,removedeal } from '../../actions/action';
@@ -14,7 +14,7 @@ const Mydeals = () => {
     const [popup,setPopup]=useState('')
     const deals=useSelector((state)=>state?.mydeals?.result)
     useEffect(()=>{
-        dispatch(mydeals())    
+        dispatch(mydeals()) 
     },[dispatch])
 
     const handleSold=(id)=>{
@@ -37,13 +37,12 @@ const Mydeals = () => {
                                 <img style={{width:'150px',height:'150px'}} src={car.images[0].image1}></img>
                             </Grid>
                             <Grid item>
-                                <p>Brand {car.brand}</p>
-                                <p>Model {car.model}</p>   
-                                <p>City {car.city}</p>
-                                <p>Selling Price {car.selling_price}</p>
-                                <p>Fuel Type {car.fuel_type}</p>
-                                <p>{car.status}</p>
-                                <p>{car.status?'Car is Sold ':'Waiting For Buyers'}</p>
+                                <p>Brand <b>{car.brand}</b></p>
+                                <p>Model <b>{car.model}</b></p>   
+                                <p>City <b>{car.city}</b></p>
+                                <p>Selling Price <b>{car.selling_price}</b></p>
+                                <p>Fuel Type <b>{car.fuel_type}</b></p>
+                                <p><b> {car.status?'Car is Sold. ':'Waiting For Buyers...'}</b></p>
                                 <Grid container spacing={3}>
                                     <Grid item>
                                         {!car.status && <Button onClick={()=>handleSold(car._id)} color="primary" variant="contained">Cars Sold</Button>}
@@ -74,6 +73,7 @@ const Mydeals = () => {
                 </DialogActions>
               </Dialog>
             }
+            {deals && deals?.cars_for_sale.length===0 && <p className={classes.msg}>NO Deals Yet!!</p>}
         </Container>
     )
 }

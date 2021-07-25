@@ -9,7 +9,7 @@ import useStyles from './styles'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import axios from 'axios'
 
 const Sell = () => {
     const classes=useStyles();
@@ -31,13 +31,21 @@ const Sell = () => {
 
     const encode=(e)=>{
         const file=e.target.files[0];
-        var fileReader = new FileReader();
-        fileReader.onload = function(fileLoadedEvent) {
-          const srcData = fileLoadedEvent.target.result;
-          formData.images[e.target.id]=srcData // og code
-          setFormData({...formData})
+        if(200<file.size/1024){
+            setErrcheck('The file size cannot exceed 200kb')
         }
-        fileReader.readAsDataURL(file);
+        else{
+            var fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent) {
+                const srcData = fileLoadedEvent.target.result;
+                formData.images[e.target.id]=srcData // og code
+                setFormData({...formData})
+            }
+            fileReader.readAsDataURL(file);
+        }
+        setTimeout(()=>{
+            setErrcheck('')
+        },3000)
     }
 
     const handleChange=(e)=>{
@@ -56,7 +64,26 @@ const Sell = () => {
             setErrcheck('Year Range 1950 - current year')
         }
         else{
-          setStep(step+1)
+            const data={
+                brand:formData.brand,
+                model:formData.model.toString().split(" ").splice(0,3).join(" "),
+                year:formData.year,
+                kms_driven:formData.kms_driven,
+                fuel_type:formData.fuel_type
+            }
+            axios.post('http://127.0.0.1:5000/predict',data)
+            .then(({data})=>{
+                if(data<0){
+                    data=Math.abs(data)
+                }
+                setFormData({...formData,selling_price:Math.round(data)})
+                console.log(formData)
+                setStep(step+1)
+                // setPrediction(Math.round(data).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
         }
         setTimeout(()=>{
             setErrcheck('')

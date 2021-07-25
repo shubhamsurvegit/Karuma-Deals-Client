@@ -22,7 +22,6 @@ export default makeStyles((theme)=>({
             top:'35%',
             left:'17%',
         }
-
     },
     container:{
         width:'100%',
@@ -37,6 +36,11 @@ export default makeStyles((theme)=>({
     text:{
         color:'white',
         padding:'0px 50px'
+    },
+    output:{
+        margin:'0px 0px 15px 0px',
+        fontSize:'25px',
+        color:'blue'
     }
 }))
 

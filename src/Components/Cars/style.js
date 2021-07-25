@@ -10,13 +10,22 @@ export default makeStyles((theme)=>({
       height: 140,
     },
     showcase:{
+    
+    },
+    maing:{
+      width:'100%',
+      margin:'10px',
       display:'grid',
-      gridTemplateColumns:'auto auto auto',
-      gridGap:'0px',
-      margin:'50px 0px 0px 88px',
+      gridGap:'20px',
+      gridTemplateColumns:'auto auto',
+      [theme.breakpoints.down(900)]: {
+        gridTemplateColumns:'auto ',
+       
+      },
       [theme.breakpoints.down(780)]: {
-        gridTemplateColumns:'auto',
-        marginLeft:'1px'
+        gridTemplateColumns:'auto ',
+        margin:'20px 0px',
+        alignItems:'center',
       }
     }
 }));

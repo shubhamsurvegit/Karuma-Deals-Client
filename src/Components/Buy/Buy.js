@@ -1,4 +1,4 @@
-import { Container,Button, TextField, Box,Paper,Checkbox } from '@material-ui/core';
+import { Container,Button, TextField, Box,Paper,Checkbox,InputLabel,Select,MenuItem } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import React,{useEffect,useState} from 'react'
 import {useDispatch} from 'react-redux'
@@ -7,6 +7,7 @@ import Cars from '../Cars/Cars';
 import useStyle from './style'
 import {useSelector} from 'react-redux'
 import Brands from './Brands';
+import cities from '../../utils/cities'
 
 const Buy = () => {
     const classes=useStyle();
@@ -17,9 +18,10 @@ const Buy = () => {
     const sellers_data=useSelector((state)=>state.sell.cars)
     const [sellers,setSellers]=useState([]);
     const [errcheck,setErrcheck]=useState('');
+    const [len,setLen]=useState(false)
 
     useEffect(()=>{
-        console.log(filterdata)
+        setLen(false)
         if(typeof(sellers_data)!=='undefined'){
             const clone=sellers_data.map((seller)=>{
                 const yes=seller.cars_for_sale.filter((car)=>{
@@ -28,7 +30,11 @@ const Buy = () => {
                     && (car.city===filterdata.location || filterdata.location==='')  
                     && filterdata.Sprice<=car.selling_price 
                     && car.selling_price<=filterdata.Eprice
+                    && car.status===false
                 })
+                if(yes.length!==0){
+                    setLen(true)
+                }
                 return {...seller,cars_for_sale:yes}
             })
             setSellers(clone)
@@ -110,8 +116,8 @@ const Buy = () => {
 
     return (
         <Container>
-            <Box  display="flex" flexDirection="row" p={1} m={1} spacing={10}>
-                <Box item paddingRight={1}>
+            <Box  display="flex" flexDirection="row" p={1} m={1} spacing={10} className={classes.mainc}>
+                <Box item paddingRight={1} className={classes.filters}>
                     <Button color="primary" onClick={()=>setFilterdata({location:'',Sprice:0,Eprice:Number.MAX_VALUE,brand:''})}>Clear all filters</Button>
                     <Box >
                         <p style={{color:'blue'}}>Search By location</p>
@@ -147,14 +153,25 @@ const Buy = () => {
                         <div className={classes.popup}>
                             <p style={{color:'blue'}}>Search Cars By Location</p>
                             {errcheck && <Alert severity="error">{errcheck}</Alert>}
-                            <TextField className={classes.tf} size="sm" placeholder="enter city" type="text" name="location" onChange={handleChange}></TextField>
-                            <Button className={classes.btn} size="lg" color="primary" variant="contained" onClick={handlePopupSubmit}>Search</Button>
+                            <Box display="flex" container flexDirection="column" alignItems="center" >
+                                <Box item p={1} m={1} >
+                                    <InputLabel id="label">Select City</InputLabel>
+                                    <Select className={classes.fields} name="location" onChange={handleChange} labelId="label" id="select" value={filterdata.location}>
+                                    {cities.map(city=>{
+                                        return <MenuItem key={city} value={city}>{city}</MenuItem>
+                                    })}
+                                    </Select>
+                                </Box>
+                                <Box item>
+                                    <Button className={classes.btn} size="large" color="primary" variant="contained" onClick={handlePopupSubmit}>Search</Button>
+                                </Box>
+                            </Box>
                         </div>
                     </Paper>
                     }
                 </Box>
                 <Box item >
-                    <Cars cars={sellers}></Cars>
+                    <Cars cars={sellers} len={len}></Cars>
                 </Box>
             </Box>
         </Container>

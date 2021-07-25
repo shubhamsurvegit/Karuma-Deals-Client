@@ -51,7 +51,9 @@ const Navbar = ({logo}) => {
                 {user? 
                     (
                         <div className={classes.auth}>
+                            
                             <Avatar onClick={()=>setDropdown(!dropdown)}>{user.charAt(0)}</Avatar>
+                            
                             <Paper onClick={()=>setDropdown(!dropdown)} className={dropdown?classes.down:classes.notdown}>
                                 <p className={classes.drops}>Signed in as <b>{user}</b></p>
                                 <p className={classes.drops}><Link style={{color:'black',textDecoration:'none'}} to="/mydeals">My Deals</Link></p>

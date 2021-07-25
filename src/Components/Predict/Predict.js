@@ -26,14 +26,19 @@ const Predict = () => {
             setErrcheck('Year Range 1950 - current year')
         }
         else{
-            console.log(predictData)
-            axios.post('http://127.0.0.1:5000/predict',predictData,{
-                headers:{
-                    'Access-Control-Allow-Origin':'*'
-                }
-            })
+            const data={
+                brand:predictData.brand,
+                model:predictData.model.toString().split(" ").splice(0,3).join(" "),
+                year:predictData.year,
+                kms_driven:predictData.kms_driven,
+                fuel_type:predictData.fuel_type
+            }
+            axios.post('http://127.0.0.1:5000/predict',data)
             .then(({data})=>{
-                setPrediction(data)
+                if(data<0){
+                    data=Math.abs(data)
+                }
+                setPrediction(Math.round(data).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
             })
             .catch((err)=>{
                 console.log(err)
@@ -84,12 +89,12 @@ const Predict = () => {
                             })} 
                         </Select>
                     </Grid>
-                    <Grid item>
+                    <Grid item container direction="row" spacing={3} >
                         <Grid item>
                             <Button onClick={handleSubmit} variant="contained" color="primary">Predict</Button>
                         </Grid>
                         <Grid item>
-                            <p>{prediction}</p>
+                            <p className={classes.output}>Rs {prediction}</p>
                         </Grid>
                     </Grid>
                 </Grid>

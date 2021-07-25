@@ -46,6 +46,7 @@ export default makeStyles(()=>({
         position:'fixed',
         top:'2%',  
         left:'92%',
-        color:'red'
+        color:'red',
+        transform:'translate(-50%,-20%)',
     }
 }))

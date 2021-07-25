@@ -4,15 +4,15 @@ const url="http://localhost:5000"
 
 export const login=(userData,history)=>
     async (dispatch)=>{
-        console.log(userData)
         axios.post(`${url}/login`,userData)
-        .then(({data},res)=>{
+        .then(({data})=>{
+            console.log(data)
             dispatch({type:'AUTH',data})
             history.push('/')
         })
         .catch((err)=>{
-            
-            console.log(err)
+            // console.log(data)
+            console.log(err.message)
         })
     }
 
@@ -32,7 +32,6 @@ export const login_with_google=(userData,history)=>
     async (dispatch)=>{
         axios.post(`${url}/google/login`,userData)
         .then(({data})=>{
-            console.log(data)
             dispatch({type:'AUTH',data})
             history.push('/')
         })
@@ -79,6 +78,7 @@ export const mydeals=()=>
         const head=addtoken();
         axios.get(`${url}/mydeals`,head)
         .then(({data})=>{
+            console.log(data)
             dispatch({type:'FETCH_DEALS',payload:data})
         })
         .catch((err)=>console.log(err))

@@ -3,6 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 import {Paper,Button, TextField,Grid,InputLabel,Select,MenuItem} from '@material-ui/core'
 import {fuel_types,brands,models} from '../../Predict/fields'
 import useStyle from '../styles'
+import cities from '../../../utils/cities'
 
 const Form1 = ({formData,handleChange,Continue,errcheck}) => {
     const classes=useStyle()
@@ -31,9 +32,11 @@ const Form1 = ({formData,handleChange,Continue,errcheck}) => {
                     </Grid>
                     <Grid item>
                         <InputLabel id="label">Select City</InputLabel>
-                        <TextField name="city" placeholder="City" required
-                         value={formData.city} onChange={handleChange}
-                         ></TextField>
+                        <Select className={classes.fields} name="city" onChange={handleChange} labelId="label" id="select" value={formData.city}>
+                            {cities.map(city=>{
+                                return <MenuItem key={city} value={city}>{city}</MenuItem>
+                            })}
+                        </Select>
                     </Grid>
                     <Grid item>
                         <InputLabel id="label">Enter Year of Purchase</InputLabel>
@@ -55,26 +58,6 @@ const Form1 = ({formData,handleChange,Continue,errcheck}) => {
                         <Button onClick={Continue} variant="contained" color="primary">Next</Button>
                     </Grid>
                 </Grid>
-                {/* <form> 
-                        <TextField name="brand" placeholder="Brand" required
-                            value={formData.brand} onChange={handleChange}>
-                        </TextField>
-                        <TextField margin='normal' name="model" placeholder="Model" required
-                             value={formData.model} onChange={handleChange}
-                        ></TextField>
-                        <TextField margin='normal' name="year" placeholder="Year" required
-                            value={formData.year} onChange={handleChange}></TextField>
-                        <TextField margin='normal' name="ownership" placeholder="Ownership" required
-                             value={formData.ownership} onChange={handleChange}>
-                         </TextField>
-                         <TextField margin='normal' name="city" placeholder="City" required
-                         value={formData.city} onChange={handleChange}
-                         ></TextField>
-                        <TextField margin='normal' name="price" placeholder="Expected Price" required
-                         value={formData.price} onChange={handleChange}
-                         ></TextField>
-                        
-                </form> */}
             </Paper>
     )
 }

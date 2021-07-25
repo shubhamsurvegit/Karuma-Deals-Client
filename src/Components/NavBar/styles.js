@@ -30,7 +30,7 @@ export default makeStyles((theme)=>({
             height:'500px',
             position:'absolute',
             top:'80px',
-            left:'-100%',
+            left:'-200%',
             opacity:1,
             transition:'all 0.5 ease'
         }
@@ -66,7 +66,7 @@ export default makeStyles((theme)=>({
         position:'absolute',
         width:'40px',
         height:'40px',
-        left:'50px'
+        left:'50px',
     },
     logoimage:{
         width:'40px',
@@ -107,11 +107,12 @@ export default makeStyles((theme)=>({
     },
     auth:{
         position:'absolute',
-        top:'40px',
-        right:'30px',
+        top:'8%',
+        left:'94%',
         transform:'translate(-50%,-50%)',
         [theme.breakpoints.down(780)]: {
-            left:'380px',
+            top:'50%',
+            left:'88%'
         },
         zIndex:'1'
     },
@@ -128,5 +129,5 @@ export default makeStyles((theme)=>({
     },
     drops:{
         cursor:'pointer',
-    }
+    },
 }))

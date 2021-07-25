@@ -8,12 +8,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
-const Cars = ({cars}) => {
+const Cars = ({cars,len}) => {
     const [model,setModel]=useState('false')
     const [seller,setSeller]=useState();
     const classes=useStyles();
     const [msg,setMsg]=useState('');
     const [loggedIn,setLoggedIn]=useState(true);
+
     const showdetails=(seller,car)=>{
         seller.car_for_sale=car
         setSeller(seller)
@@ -41,14 +42,13 @@ const Cars = ({cars}) => {
             .catch((err)=>console.log(err))
         }
     }
-    
     return (
         <div>
-            <Container>
-                <Grid container alignItems="stretch" spacing={10} >
+            <Container container>
+                <Grid container alignItems="stretch" spacing={10} className={classes.maing} >
                     {cars && cars.map((seller)=>
-                        {return seller.cars_for_sale.map((car)=>(
-                            <Grid key={car._id} className={classes.showcase} >
+                        {return seller.cars_for_sale.map((car)=>{
+                            return <Grid key={car._id} className={classes.showcase} >
                                 <Card onClick={()=>showdetails(seller.seller_data,car)} key={car._id}>
                                     <CardActionArea>
                                         <CardMedia
@@ -68,17 +68,17 @@ const Cars = ({cars}) => {
                                         <Typography gutterBottom variant="h5" component="h2">
                                            Rs {car.selling_price}
                                         </Typography>
-                                        <Typography variant="p" component="p">
+                                        <Typography variant="subtitle1" component="p">
                                             Seller Name : <b>{seller.seller_data.name}</b>
                                         </Typography>
-                                        <Typography gutterBottom variant="p" component="p">
+                                        <Typography gutterBottom variant="subtitle1" component="p">
                                             Contact : <b>{seller.seller_data.phone}</b>
                                         </Typography>
                                         <Button onClick={()=>handleClick(car)} variant="contained" color="secondary">Intrested</Button>
                                     </CardContent>
                                 </Card>
                             </Grid>
-                        ))}  
+                        })}  
                     )}
                 </Grid>
             </Container>
@@ -96,6 +96,7 @@ const Cars = ({cars}) => {
                     </DialogActions>
                 </Dialog>
             }
+            {!len && <p>Nothing matched your search filter!!!</p>}
         </div>
     )
 }

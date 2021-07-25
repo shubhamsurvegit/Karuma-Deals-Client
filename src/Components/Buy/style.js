@@ -2,7 +2,13 @@ import {makeStyles} from '@material-ui/core/styles'
 
 
 
-export default makeStyles(()=>({
+export default makeStyles((theme)=>({
+    mainc:{
+        [theme.breakpoints.down(680)]: {
+            display:'grid',
+            gridTemplateColumns:'auto',
+          }
+    },
     popup:{
         borderRadius:'10px',
         backgroundColor:'white',
@@ -35,12 +41,6 @@ export default makeStyles(()=>({
         left:'50%',
         transform:'translate(-50%,-50%)',
     },
-    btn:{
-        position:'absolute',
-        top:'70%',
-        left:'42%',
-        transform:'translate(-50%,-50%)',
-    },
     locationdiv:{
         padding:'9px',
     },
@@ -48,5 +48,13 @@ export default makeStyles(()=>({
         width: '160px',
         height: '310px',
         overflow:'scroll'
-    }
+    },
+    filters:{
+        [theme.breakpoints.down(680)]: {
+            margin:'auto'
+          }
+    },
+    fields:{
+        width:'200px'
+    },
 }))

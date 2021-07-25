@@ -61,13 +61,15 @@ const Form2 = ({formData,step,back,submit,handleChange,encode,errcheck,setFormDa
                     </Grid>
                 </Grid>
             </div>
-            <Card>
+            <Card style={{padding:'10px' ,margin:'10px'}}>
                 <p>{formData.year}, {formData.brand}, {formData.model}</p>
                 <p>{formData.kms_driven } kms, {formData.fuel_type}, {formData.city}</p>
             </Card>
 
             <form>
-                <TextField onChange={handleChange} margin="normal" name="selling_price" placeholder="Selling Price"></TextField>
+            <label>Predicted price</label>
+                <TextField label="Selling Price" variant="outlined" onChange={handleChange} margin="normal" name="selling_price" defaultValue={formData.selling_price} placeholder="Selling Price"></TextField>
+               
                 <TextField margin="normal" label="Name" variant="outlined" defaultValue={user.name}></TextField>
                 <TextField onChange={handleChange} defaultValue={user.phone} name="contact" margin="normal" label="Contact" variant="outlined"></TextField>
                 {step>0 && <Button onClick={back} variant="contained" color="secondary">Back</Button>}

@@ -19,11 +19,7 @@ export default makeStyles((theme)=>({
         margin:'10px',
     },
     paper:{
-        // padding:'10px',
-        height:600,
-        // width:260,
-        // margin:'20px auto',
-        // zindex:'4'
+        height:'100%',
         width:'25%',
         margin:'10px auto',
         padding:'15px 15px 0px 15px',
@@ -42,14 +38,18 @@ export default makeStyles((theme)=>({
         height:'350px',
         zIndex:6,
         position:'absolute',
-        top:'22%',
-        // left:'30%',
-        margin:'10px auto',
-        backgroundColor:'red',
+        top:'50%',
+        left:'50%',
+        transform:'translate(-50%,-50%)',
+        color:'red',
+        marginBottom:'10px',
+        backgroundColor:'white',
         [theme.breakpoints.down(780)]: {
             width:"400px",
             margin:'10px',
-            position:'fixed'
+            top:'50%',
+            left:'50%',
+            transform:'translate(-50%,-50%)',
         },
     },
     images:{
