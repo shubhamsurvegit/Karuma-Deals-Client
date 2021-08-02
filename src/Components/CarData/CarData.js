@@ -24,7 +24,7 @@ const CarData = ({showDetails,seller,msg}) => {
                         <ArrowForwardIosIcon/>
                     </div>
                 </div>
-                {msg===seller.car_for_sale._id && <Typography variant="h5" component="h6">Message has been set to the seller via sms</Typography>}
+                {msg===seller.car_for_sale._id && <Typography className={classes.msg} variant="h5" component="h6">Message has been sent to seller via email</Typography>}
                 <Button size="small" className={classes.close} onClick={showDetails}><CloseIcon/></Button>
             </div>
         </div>

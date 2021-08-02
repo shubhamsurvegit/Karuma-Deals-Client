@@ -5,7 +5,7 @@ export default makeStyles((theme)=>({
         backgroundColor: '#000000',
         backgroundImage: 'linear-gradient(147deg, #000000 0%, #434343 74%)',
         width:'100%',
-        height:'120vh',
+        height:'130vh',
         padding:'8px',
         zIndex:'-1',
         [theme.breakpoints.down(780)]: {

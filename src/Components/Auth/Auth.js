@@ -13,7 +13,7 @@ const Auth = () => {
     const [errcheck,setErrcheck]=useState('');
     const [isSignUp,setIsSignUp]=useState(false);
     const [formData,setFormData]=useState({
-        name:'',phone:'',password:'',confirmPassword:''
+        name:'',phone:'',email:'',password:'',confirmPassword:''
     })
 
     const handleChange=(e)=>{
@@ -68,6 +68,9 @@ const Auth = () => {
                         <Grid item>
                             <TextField onChange={handleChange} size="small" name="phone" placeholder="Enter Your Mobile Number" type="number" variant="outlined"></TextField>
                         </Grid>
+                        {isSignUp && <Grid item>
+                            <TextField onChange={handleChange} size="small" name="email" placeholder="Enter Your Email" type="email" variant="outlined"></TextField>
+                        </Grid>}
                         <Grid item>
                             <TextField onChange={handleChange} size="small" name="password" placeholder="Enter Password" type="password" variant="outlined"></TextField>
                         </Grid>

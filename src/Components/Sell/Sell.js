@@ -77,9 +77,7 @@ const Sell = () => {
                     data=Math.abs(data)
                 }
                 setFormData({...formData,selling_price:Math.round(data)})
-                console.log(formData)
                 setStep(step+1)
-                // setPrediction(Math.round(data).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
             })
             .catch((err)=>{
                 console.log(err)
@@ -102,8 +100,7 @@ const Sell = () => {
             setErrcheck('Kindly add selling price')
         }
         else{
-            console.log(formData)
-        dispatch(listcar(formData,history))
+            dispatch(listcar(formData,history))
         }
         setTimeout(()=>{
             setErrcheck('')

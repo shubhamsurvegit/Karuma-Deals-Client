@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles'
 
 
-export default makeStyles(()=>({    
+export default makeStyles((theme)=>({    
     container:{
         color:'blue',
         position:'fixed',
@@ -12,6 +12,10 @@ export default makeStyles(()=>({
         width:'55%',
         height:'75%',
         borderRadius:'10px',
+        [theme.breakpoints.down(780)]: {
+            height:'85%',
+            top:'57%',
+        }
     },
     view:{
         position:'fixed',
@@ -48,5 +52,16 @@ export default makeStyles(()=>({
         left:'92%',
         color:'red',
         transform:'translate(-50%,-20%)',
+    },
+    msg:{
+        fontSize:'20px',
+        padding:'10px',
+        margin:'10px',
+        [theme.breakpoints.down(780)]: {
+            fontSize:'15px',
+            margin:'0px',
+            padding:'5px',
+            textAlign:'center'
+        }
     }
 }))

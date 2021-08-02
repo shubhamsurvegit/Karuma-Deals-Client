@@ -9,9 +9,9 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import InstagramIcon from '@material-ui/icons/Instagram';
+
 const Home = ({bgimage}) => {
   const classes=useStyles();
-  console.log(bgimage)
     return (
       <div className={classes.container}>
           <div className={classes.showcase}>

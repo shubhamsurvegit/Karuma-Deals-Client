@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const Form2 = ({formData,step,back,submit,handleChange,encode,errcheck,setFormData}) => {
     const classes=useStyle() 
-    const paper={padding:'10px',height:520,width:280,margin:'50px auto',padding:'10px 30px'}
+    const paper={padding:'10px',height:'100%',width:280,margin:'50px auto',padding:'10px 30px'}
     const user=JSON.parse(localStorage.getItem('profile'))?.result
     const {image1,image2,image3,image4,image5}=formData.images
     const [popup,setPopup]=useState('');
@@ -22,6 +22,7 @@ const Form2 = ({formData,step,back,submit,handleChange,encode,errcheck,setFormDa
         <div>
         <Paper style={paper}>
              {errcheck && <Alert className={classes.err} severity="error">{errcheck}</Alert>}
+             <label style={{fontSize:'10px',textAlign:'center'}}>Add images of size not more than 200kb.</label>
             <div>
                 <Grid container spacing={1}> 
                     <Grid item >
@@ -63,14 +64,13 @@ const Form2 = ({formData,step,back,submit,handleChange,encode,errcheck,setFormDa
             </div>
             <Card style={{padding:'10px' ,margin:'10px'}}>
                 <p>{formData.year}, {formData.brand}, {formData.model}</p>
-                <p>{formData.kms_driven } kms, {formData.fuel_type}, {formData.city}</p>
+                <p>{formData.kms_driven } kms driven, {formData.fuel_type}, {formData.city}</p>
             </Card>
 
             <form>
-            <label>Predicted price</label>
-                <TextField label="Selling Price" variant="outlined" onChange={handleChange} margin="normal" name="selling_price" defaultValue={formData.selling_price} placeholder="Selling Price"></TextField>
-               
-                <TextField margin="normal" label="Name" variant="outlined" defaultValue={user.name}></TextField>
+            <label style={{fontSize:'10px'}}>Predicted selling price. You can change it if required.</label>
+                <TextField label="Selling Price" variant="outlined" onChange={handleChange} margin="normal" name="selling_price" defaultValue={formData.selling_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} placeholder="Selling Price"></TextField>
+                <TextField margin="normal" label="Email" variant="outlined" defaultValue={user.email}></TextField>
                 <TextField onChange={handleChange} defaultValue={user.phone} name="contact" margin="normal" label="Contact" variant="outlined"></TextField>
                 {step>0 && <Button onClick={back} variant="contained" color="secondary">Back</Button>}
                 <Button style={{marginLeft:'10px'}} onClick={submit} variant="contained" color="primary">Sell Car</Button>

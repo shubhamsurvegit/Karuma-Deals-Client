@@ -6,6 +6,8 @@ import axios from 'axios'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faRupeeSign } from '@fortawesome/free-solid-svg-icons'
 
 
 const Cars = ({cars,len}) => {
@@ -21,7 +23,7 @@ const Cars = ({cars,len}) => {
         setModel(!model)
     }
 
-    const handleClick=(car)=>{
+    const handleClick=(seller,car)=>{
         const user=JSON.parse(localStorage.getItem('profile'))?.result
         if(typeof user==='undefined'){
             setLoggedIn(false)
@@ -30,6 +32,7 @@ const Cars = ({cars,len}) => {
             const data={
                 name:user.name,
                 contact:user.phone,
+                email:seller.email,
                 brand:car.brand,
                 model:car.model,
             }
@@ -46,10 +49,13 @@ const Cars = ({cars,len}) => {
         <div>
             <Container container>
                 <Grid container alignItems="stretch" spacing={10} className={classes.maing} >
-                    {cars && cars.map((seller)=>
-                        {return seller.cars_for_sale.map((car)=>{
+                    {cars && cars.map((seller)=>{
+                        if(seller.seller_data[0].phone===JSON.parse(localStorage.getItem('profile'))?.result.phone){
+                            return false;
+                        }
+                        return seller.cars_for_sale.map((car)=>{
                             return <Grid key={car._id} className={classes.showcase} >
-                                <Card onClick={()=>showdetails(seller.seller_data,car)} key={car._id}>
+                                <Card className={classes.showcase} onClick={()=>showdetails(seller.seller_data,car)} key={car._id}>
                                     <CardActionArea>
                                         <CardMedia
                                             className={classes.media}
@@ -63,18 +69,18 @@ const Cars = ({cars,len}) => {
                                             {car.year},{car.brand}, {car.model}
                                         </Typography>
                                         <Typography  gutterBottom variant="body2" color="textSecondary" component="p">
-                                            {car.kms_driven} kms, {car.fuel_type}, {car.city}
+                                            {car.kms_driven} kms driven, {car.fuel_type}, {car.city}
                                         </Typography>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                           Rs {car.selling_price}
+                                        <FontAwesomeIcon icon={faRupeeSign} /> {car.selling_price}
                                         </Typography>
                                         <Typography variant="subtitle1" component="p">
-                                            Seller Name : <b>{seller.seller_data.name}</b>
+                                            Seller Name : <b>{seller.seller_data[0].name}</b>
                                         </Typography>
                                         <Typography gutterBottom variant="subtitle1" component="p">
-                                            Contact : <b>{seller.seller_data.phone}</b>
+                                            Contact : <b>{seller.seller_data[0].phone}</b>
                                         </Typography>
-                                        <Button onClick={()=>handleClick(car)} variant="contained" color="secondary">Intrested</Button>
+                                        <Button onClick={()=>handleClick(seller.seller_data[0],car)} variant="contained" color="secondary">Intrested</Button>
                                     </CardContent>
                                 </Card>
                             </Grid>

@@ -4,6 +4,8 @@ import {fuel_types,brands,models} from './fields'
 import Alert from '@material-ui/lab/Alert';
 import useStyle from './styles'
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faRupeeSign } from '@fortawesome/free-solid-svg-icons'
 
 const Predict = () => {
     const classes=useStyle();
@@ -94,7 +96,7 @@ const Predict = () => {
                             <Button onClick={handleSubmit} variant="contained" color="primary">Predict</Button>
                         </Grid>
                         <Grid item>
-                            <p className={classes.output}>Rs {prediction}</p>
+                          <p className={classes.output}><FontAwesomeIcon icon={faRupeeSign} /> {prediction}</p>
                         </Grid>
                     </Grid>
                 </Grid>

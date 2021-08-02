@@ -5,7 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import Avatar from '@material-ui/core/Avatar';
 import useStyles from './styles'
-
+import decode from 'jwt-decode'
 
 const Navbar = ({logo}) => {
     const classes=useStyles();
@@ -16,6 +16,13 @@ const Navbar = ({logo}) => {
     const [user,setUser]=useState(JSON.parse(localStorage.getItem('profile'))?.result.name);
 
     useEffect(()=>{
+        const user=JSON.parse(localStorage.getItem('profile'));
+        if(user?.token){
+            const decodedtoken=decode(user.token)   
+            if(decodedtoken.exp*1000<new Date().getTime()){
+                logout()
+            }
+        }
         setUser(JSON.parse(localStorage.getItem('profile'))?.result.name)
     },[location])
     

@@ -21,6 +21,7 @@ const Buy = () => {
     const [len,setLen]=useState(false)
 
     useEffect(()=>{
+        const user=JSON.parse(localStorage.getItem('profile'))?.result
         setLen(false)
         if(typeof(sellers_data)!=='undefined'){
             const clone=sellers_data.map((seller)=>{

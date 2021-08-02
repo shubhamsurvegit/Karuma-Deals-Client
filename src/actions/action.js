@@ -6,13 +6,11 @@ export const login=(userData,history)=>
     async (dispatch)=>{
         axios.post(`${url}/login`,userData)
         .then(({data})=>{
-            console.log(data)
             dispatch({type:'AUTH',data})
             history.push('/')
         })
-        .catch((err)=>{
-            // console.log(data)
-            console.log(err.message)
+        .catch((res)=>{
+            console.log(res)
         })
     }
 

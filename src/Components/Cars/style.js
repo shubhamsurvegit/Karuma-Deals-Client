@@ -9,15 +9,12 @@ export default makeStyles((theme)=>({
     media: {
       height: 140,
     },
-    showcase:{
-    
-    },
     maing:{
       width:'100%',
       margin:'10px',
       display:'grid',
       gridGap:'20px',
-      gridTemplateColumns:'auto auto',
+      gridTemplateColumns:' repeat(2, 1fr)',
       [theme.breakpoints.down(900)]: {
         gridTemplateColumns:'auto ',
        
