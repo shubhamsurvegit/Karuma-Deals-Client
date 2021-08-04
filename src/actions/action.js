@@ -1,20 +1,20 @@
 import axios from 'axios'
-const url="http://localhost:5000"
+const url="https://kuruma-deals-api.herokuapp.com"
 
 
-export const login=(userData,history)=>
+export const login=(userData,history,setErrorcheck)=>
     async (dispatch)=>{
         axios.post(`${url}/login`,userData)
         .then(({data})=>{
             dispatch({type:'AUTH',data})
             history.push('/')
         })
-        .catch((res)=>{
-            console.log(res)
+        .catch((err)=>{
+            setErrorcheck(err.response?.data.message)
         })
     }
 
-export const register= (userData,history)=>
+export const register= (userData,history,setErrorcheck)=>
     async (dispatch)=>{
         axios.post(`${url}/register`,userData)
         .then(({data})=>{
@@ -23,6 +23,7 @@ export const register= (userData,history)=>
         })
         .catch((err)=>{
             console.log(err)
+            setErrorcheck(err.response?.data.message)
         })
     }
 
@@ -79,7 +80,7 @@ export const mydeals=()=>
             console.log(data)
             dispatch({type:'FETCH_DEALS',payload:data})
         })
-        .catch((err)=>console.log(err))
+        .catch((error)=>console.log(error.response.data))
     }    
 
 export const soldcar=(id)=>

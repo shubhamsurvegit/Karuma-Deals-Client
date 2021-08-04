@@ -12,6 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios'
 
 const Sell = () => {
+    const url='https://shrouded-lowlands-06079.herokuapp.com'
     const classes=useStyles();
     const [step,setStep]=useState(0);
     const dispatch=useDispatch();
@@ -71,7 +72,7 @@ const Sell = () => {
                 kms_driven:formData.kms_driven,
                 fuel_type:formData.fuel_type
             }
-            axios.post('http://127.0.0.1:5000/predict',data)
+            axios.post(url+'/predict',data)
             .then(({data})=>{
                 if(data<0){
                     data=Math.abs(data)
@@ -93,10 +94,10 @@ const Sell = () => {
     }
 
     const submit=()=>{
-        // if(!formData.images.image1 || !formData.images.image2 || !formData.images.image3 || !formData.images.image4 || !formData.images.image5 ){
-        //     setErrcheck('Kindly add all images')
-        // }
-        if(!formData.selling_price){
+        if(!formData.images.image1 || !formData.images.image2 || !formData.images.image3 || !formData.images.image4 || !formData.images.image5 ){
+            setErrcheck('Kindly add all images')
+        }
+        else if(!formData.selling_price){
             setErrcheck('Kindly add selling price')
         }
         else{

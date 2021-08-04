@@ -35,7 +35,7 @@ const Auth = () => {
                 setErrcheck('Password do not match.')
             }
             else{
-                dispatch(register(formData,history))
+                dispatch(register(formData,history,setErrcheck))
             }
         }
         else{
@@ -44,7 +44,7 @@ const Auth = () => {
 
             }
             else{
-                dispatch(login(formData,history))
+                dispatch(login(formData,history,setErrcheck))
             }
         }
         setTimeout(()=>{

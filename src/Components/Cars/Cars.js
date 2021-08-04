@@ -11,6 +11,7 @@ import {faRupeeSign } from '@fortawesome/free-solid-svg-icons'
 
 
 const Cars = ({cars,len}) => {
+    const url="https://kuruma-deals-api.herokuapp.com"
     const [model,setModel]=useState('false')
     const [seller,setSeller]=useState();
     const classes=useStyles();
@@ -37,7 +38,7 @@ const Cars = ({cars,len}) => {
                 model:car.model,
             }
             console.log(data)
-            axios.post('http://localhost:5000/send-sms',data)
+            axios.post(url+'/send-sms',data)
             .then((msg)=>{
                 console.log("msg send")
                 setMsg(car._id)

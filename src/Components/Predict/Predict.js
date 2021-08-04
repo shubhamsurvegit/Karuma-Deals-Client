@@ -9,6 +9,7 @@ import {faRupeeSign } from '@fortawesome/free-solid-svg-icons'
 
 const Predict = () => {
     const classes=useStyle();
+    const url='https://shrouded-lowlands-06079.herokuapp.com'
     const [errcheck,setErrcheck]=useState('');
     const [prediction,setPrediction]=useState('');
     const [predictData,setPredictData]=useState({brand:'',model:'',year:'',kms_driven:'',fuel_type:''})
@@ -35,7 +36,7 @@ const Predict = () => {
                 kms_driven:predictData.kms_driven,
                 fuel_type:predictData.fuel_type
             }
-            axios.post('http://127.0.0.1:5000/predict',data)
+            axios.post(url+'/predict',data)
             .then(({data})=>{
                 if(data<0){
                     data=Math.abs(data)
